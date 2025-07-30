@@ -1,71 +1,34 @@
-# AutoUNMS AI Agent for Web Scraping & Summarization
+# 🕸️ AutoUNMS AI Agent for Web Scraping
 
-**AutoUNMS** is an AI-driven web scraping and summarization agent built using [n8n](https://n8n.io/). It automates intelligent web search, content scraping across multiple pages, and summarization using the **Serper API** (Google search) and **Gemini API** (AI summarizer), producing clean, summarized HTML content.
+This project is a web scraping AI agent built using **n8n**. It allows you to search and scrape data from the web using a **manual trigger** and returns summarized results in HTML format.
 
----
+## 🔄 Workflow Overview
 
-## 🚀 Features
+1. **Manual Trigger** – Initiates the workflow manually.
+2. **HTTP Request (Search)** – Uses the **Serper API** to search Google for relevant links.
+3. **Code Node** – Extracts URLs from the search results and prepares a list of links (5 pages, 5 links per page).
+4. **SplitInBatches** – Iterates through the list of links in batches.
+5. **HTTP Request (Scraping)** – Sends GET requests to each link to fetch the HTML content.
+6. **Code Node (Cleaning)** – Cleans the raw HTML and removes unwanted tags like `<script>` and `<style>`.
+7. **Gemini API** – Summarizes the cleaned content into readable text.
+8. **HTML File Conversion** – Converts the final summarized data into a downloadable HTML file.
 
-- 🔘 **Manual Trigger** to control when the workflow runs
-- 🔍 **Search via Serper API** to simulate Google-style search queries
-- 🔗 **Link Parsing & Batch Control** to loop through 5 pages with 5 results per page (25 total)
-- 🌐 **Web Scraping** using HTTP GET requests on each result
-- 🧼 **HTML Cleaning** to strip out tags like `<script>` and `<style>`
-- ✨ **Summarization via Gemini API** to convert raw scraped text into readable insights
-- 🧾 **HTML Output** to present all summaries in a clean HTML file format
-- 🔄 Designed for flexibility and automation with minimal manual effort
+## 📥 Input
 
----
+- **Trigger**: Manual (from n8n UI)
+- **Search Term**: For example: `Cairo apartment price`
 
-## 🧠 Workflow Breakdown
-
-1. **Manual Trigger**
-   - Start the process manually from within the n8n UI.
-
-2. **HTTP Request – Serper API**
-   - Searches for the query term using Serper (Google alternative).
-   - You can configure how many pages and results you want.
-
-3. **Code Node – Link Splitter**
-   - Extracts links from Serper API results and structures them into a flat list of URLs.
-
-4. **Batch & Pagination**
-   - Handles multiple pages (e.g., 5) with 5 links per page.
-   - Uses `SplitInBatches` node to loop through the results in manageable chunks.
-
-5. **HTTP Request – Scraper**
-   - Sends a GET request to each link to retrieve the raw HTML content.
-
-6. **Code Node – HTML Cleaner**
-   - Strips unnecessary tags (`<script>`, `<style>`, etc.)
-   - Extracts plain readable text content.
-
-7. **Batching for Gemini API**
-   - Groups cleaned results into batches for efficient summarization.
-
-8. **Gemini API – Summarization**
-   - Summarizes cleaned article content using Gemini.
-
-9. **Code Node – HTML Converter**
-   - Converts each summary into a structured HTML block.
-
-10. **Output**
-    - Saves the final HTML content as a `.html` file or sends it to a storage service (like Google Drive).
-
----
-
-Example Output
+## 📤 Example Output
 
 Real Estate Listing (Cairo Apartments)
 
-```text
-City       | Price
------------|----------
-Cairo      | 1500000
-Giza       | 950000
-Nasr City  | 1200000
-New Cairo  | 1700000
-Heliopolis | 1400000
+| City       | Price   |
+|------------|---------|
+| Cairo      | 1500000 |
+| Giza       | 950000  |
+| Nasr City  | 1200000 |
+| New Cairo  | 1700000 |
+| Heliopolis | 1400000 |
 
 ---
 
@@ -80,5 +43,35 @@ Heliopolis | 1400000
 - **HTTP Request Nodes** – To call external APIs and fetch HTML pages
 - **SplitInBatches Node** – For looping over links in batches
 
+## 📄 Output Format
 
+- The final result is exported as a structured HTML file with the summarized and cleaned content.
+
+## 📌 Use Cases
+
+- Real estate listings
+- Product price comparison
+- News summarization
+- Academic or research scraping
+
+## 🔧 How to Use
+Install n8n (locally, cloud, or Docker).
+
+Import Workflow: Load the .json into n8n.
+
+Set API Credentials:
+
+Serper API Key: https://serper.dev
+
+Gemini API Key (optional): https://ai.google.dev
+
+Run Manual Trigger
+
+Input Query: For example: "Cairo apartment prices"
+
+Receive Output: Clean table of City and Price, downloadable or saved to file.
+
+## 📜 License
+MIT License
+© 2025 Youssef Elzahar – Built with n8n, AI, and automation 💡
 

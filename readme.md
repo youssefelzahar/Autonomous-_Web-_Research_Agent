@@ -54,10 +54,9 @@
 
 ---
 
+Example Output
 
-## 📦 Example Output
-
-### 🏙️ Real Estate Listing (Cairo Apartments)
+Real Estate Listing (Cairo Apartments)
 
 ```text
 City       | Price
@@ -68,19 +67,18 @@ Nasr City  | 1200000
 New Cairo  | 1700000
 Heliopolis | 1400000
 
+---
+
 ## 🛠️ Technologies Used
-n8n – Open-source workflow automation
 
-Serper API – Google search result extraction (https://serper.dev)
-
-Gemini API – AI summarization (https://ai.google.dev)
-
-JavaScript – Code nodes for parsing and cleaning
-
-HTML – Final output format
-
-Manual Trigger – To allow full user control over execution
-
+- **n8n** – Workflow automation engine
+- **Serper API** – Google Search API for scraping links
+- **Gemini API** – Summarizes raw content into clean text
+- **JavaScript** – Custom code nodes for text cleaning and parsing
+- **HTML** – Output format for structured results
+- **Manual Trigger** – Used to manually initiate scraping
+- **HTTP Request Nodes** – To call external APIs and fetch HTML pages
+- **SplitInBatches Node** – For looping over links in batches
 
 
 
